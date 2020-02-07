@@ -10,11 +10,14 @@
         </b-navbar-item>
       </template>
       <template slot="start">
-        <b-navbar-item tag="router-link" to="/">
-          Home
+        <b-navbar-item tag="router-link" to="/instances">
+          Instances
         </b-navbar-item>
-        <b-navbar-item tag="router-link" to="/about">
-          About
+        <b-navbar-item tag="router-link" to="/cluster">
+          Cluster
+        </b-navbar-item>
+        <b-navbar-item tag="router-link" to="/jobs">
+          Jobs
         </b-navbar-item>
       </template>
       <template slot="end">
