@@ -4,7 +4,9 @@
       <b-tab-item label="Statistics">
         <ClusterStatsDigits />
       </b-tab-item>
-      <b-tab-item label="Instances"></b-tab-item>
+      <b-tab-item label="Instances">
+        <ClusterNodesTable />
+      </b-tab-item>
       <b-tab-item label="Information"></b-tab-item>
     </b-tabs>
   </div>
@@ -12,11 +14,13 @@
 
 <script>
 import ClusterStatsDigits from '../components/ClusterStatsDigits.vue';
+import ClusterNodesTable from '../components/ClusterNodesTable.vue';
 
 export default {
   name: 'Cluster',
   components: {
     ClusterStatsDigits,
+    ClusterNodesTable,
   },
 };
 </script>
