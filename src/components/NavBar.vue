@@ -2,11 +2,8 @@
   <div id="nav">
     <b-navbar>
       <template slot="brand">
-        <b-navbar-item tag="router-link" to='/'>
-          <img
-            class="brand-logo"
-            src="../assets/ganeti-logo.png"
-          >
+        <b-navbar-item tag="router-link" to="/">
+          <img class="brand-logo" src="../assets/ganeti-logo.png" />
         </b-navbar-item>
       </template>
       <template slot="start">
@@ -39,12 +36,12 @@
 
 <script>
 export default {
-  name: 'NavBar',
+  name: 'NavBar'
 };
 </script>
 
 <style scoped>
-  .brand-logo {
-    max-height: 3rem;
-  }
+.brand-logo {
+  max-height: 3rem;
+}
 </style>

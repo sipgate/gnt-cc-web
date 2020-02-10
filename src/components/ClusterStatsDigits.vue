@@ -43,16 +43,16 @@
 
 <script>
 export default {
-  name: 'ClusterStatsDigits',
+  name: 'ClusterStatsDigits'
 };
 </script>
 
 <style scoped>
-  .tile {
-    margin: 5px;
-  }
+.tile {
+  margin: 5px;
+}
 
-  .information {
-    font-weight: normal;
-  }
+.information {
+  font-weight: normal;
+}
 </style>

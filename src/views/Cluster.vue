@@ -20,10 +20,9 @@ export default {
   name: 'Cluster',
   components: {
     ClusterStatsDigits,
-    ClusterNodesTable,
-  },
+    ClusterNodesTable
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
