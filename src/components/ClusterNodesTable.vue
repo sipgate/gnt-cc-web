@@ -5,9 +5,9 @@
       :columns="columns"
       :paginated="true"
       :pagination-simple="false"
-      :pagination-position="bottom"
-      :default-sort-direction="asc"
-      :sort-icon-size="small"
+      :pagination-position="paginationPosition"
+      :default-sort-direction="defaultSortDirection"
+      :sort-icon-size="sortIconSize"
       :per-page="20"
     >
     </b-table>
@@ -19,6 +19,9 @@ export default {
   name: 'ClusterNodesTable',
   data () {
     return {
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      sortIconSize: 'small',
       data: [
         {
           name: 'abcd.srv.efgh.net',

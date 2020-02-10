@@ -5,13 +5,14 @@ import Home from '../views/Home.vue';
 Vue.use(VueRouter);
 
 const routes = [
+  { path: '*', redirect: '/0' },
   {
-    path: '/',
+    path: '/:cluster',
     name: 'Home',
     component: Home
   },
   {
-    path: '/instances',
+    path: '/:cluster/instances',
     name: 'Instances',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -19,12 +20,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Instances.vue')
   },
   {
-    path: '/cluster',
+    path: '/:cluster/cluster',
     name: 'Cluster',
     component: () => import(/* webpackChunkName: "about" */ '../views/Cluster.vue')
   },
   {
-    path: '/jobs',
+    path: '/:cluster/jobs',
     name: 'Jobs',
     component: () => import(/* webpackChunkName: "about" */ '../views/Jobs.vue')
   }
