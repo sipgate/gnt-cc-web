@@ -22,6 +22,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 import router from './router';
 import { store } from './store/store';
+import filesize from 'filesize';
 
 library.add(
   faCheck,
@@ -53,3 +54,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+
+Object.defineProperty(Vue.prototype, '$filesize', { value: filesize });

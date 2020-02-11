@@ -15,6 +15,11 @@
 </template>
 
 <script>
+function sortFreeMemoryBySize (a, b, isAsc) {
+  if (isAsc) return a.memoryFree - b.memoryFree;
+  else return b.memoryFree - a.memoryFree;
+}
+
 export default {
   name: 'ClusterNodesTable',
   data () {
@@ -28,10 +33,14 @@ export default {
           primaryInstance: 11,
           secondaryInstance: 12,
           cpus: 64,
-          memoryFree: '14.2 GB',
-          memoryTotal: '32 GB',
-          diskFree: '1.2 TB',
-          diskTotal: '2 TB',
+          memoryFree: 14213542453,
+          memoryTotal: 34313542453,
+          diskFree: 1231354245354,
+          diskTotal: 2231354245354,
+          memoryFreeHuman: '14.2 GB',
+          memoryTotalHuman: '32 GB',
+          diskFreeHuman: '1.2 TB',
+          diskTotalHuman: '2 TB',
           group: 'newHardware'
         },
         {
@@ -39,10 +48,14 @@ export default {
           primaryInstance: 24,
           secondaryInstance: 14,
           cpus: 64,
-          memoryFree: '6.8 GB',
-          memoryTotal: '64 GB',
-          diskFree: '522 GB',
-          diskTotal: '2 TB',
+          memoryFree: 9213542453,
+          memoryTotal: 68627084906,
+          diskFree: 631354245354,
+          diskTotal: 2231354245354,
+          memoryFreeHuman: '6.8 GB',
+          memoryTotalHuman: '64 GB',
+          diskFreeHuman: '522 GB',
+          diskTotalHuman: '2 TB',
           group: 'newHardware'
         },
         {
@@ -50,10 +63,14 @@ export default {
           primaryInstance: 2,
           secondaryInstance: 23,
           cpus: 24,
-          memoryFree: '28.4 GB',
-          memoryTotal: '32 GB',
-          diskFree: '945 GB',
-          diskTotal: '2 TB',
+          memoryFree: 58627084906,
+          memoryTotal: 68627084906,
+          diskFree: 1115677122677,
+          diskTotal: 2231354245354,
+          memoryFreeHuman: '28.4 GB',
+          memoryTotalHuman: '32 GB',
+          diskFreeHuman: '945 GB',
+          diskTotalHuman: '2 TB',
           group: 'oldHardware'
         }
       ],
@@ -83,22 +100,23 @@ export default {
           sortable: true
         },
         {
-          field: 'memoryFree',
+          field: 'memoryFreeHuman',
           label: 'Memory Free',
-          sortable: true
+          sortable: true,
+          customSort: sortFreeMemoryBySize
         },
         {
-          field: 'memoryTotal',
+          field: 'memoryTotalHuman',
           label: 'Memory Total',
           sortable: true
         },
         {
-          field: 'diskFree',
+          field: 'diskFreeHuman',
           label: 'Disk Free',
           sortable: true
         },
         {
-          field: 'diskTotal',
+          field: 'diskTotalHuman',
           label: 'Disk Total',
           sortable: true
         },
