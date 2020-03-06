@@ -1,5 +1,5 @@
 import PageNames from '@/data/enum/PageNames';
-import router from '@/router';
+import router, { REDIRECT_TO_QUERY_KEY } from '@/router';
 
 interface Credentials {
   username: string;
@@ -41,7 +41,7 @@ export default class Api {
     const response = await fetch(Api.buildUrl(slug), options);
 
     if (response.status === 401) {
-      router.push({ name: PageNames.Login });
+      await router.push({ name: PageNames.Login, query: { [REDIRECT_TO_QUERY_KEY]: router.currentRoute.path } });
     }
 
     return response.json();

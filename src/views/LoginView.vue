@@ -39,6 +39,7 @@ import ClusterStatsDigits from '@/components/ClusterStatsDigits.vue';
 import Component from 'vue-class-component';
 import Api from '@/store/api';
 import PageNames from '@/data/enum/PageNames';
+import { REDIRECT_TO_QUERY_KEY } from '@/router';
 
   @Component({
     name: 'LoginView',
@@ -77,7 +78,11 @@ export default class LoginView extends Vue {
       }
 
       await this.$store.dispatch('saveToken', response.token);
-      await this.$router.push({ name: PageNames.Statistics });
+      if (typeof this.$route.query[REDIRECT_TO_QUERY_KEY] !== 'undefined') {
+        await this.$router.push(this.$route.query[REDIRECT_TO_QUERY_KEY] as string);
+      } else {
+        await this.$router.push({ name: PageNames.Statistics });
+      }
     }
 };
 </script>

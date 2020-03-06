@@ -10,6 +10,8 @@ import LoginView from '@/views/LoginView.vue';
 
 Vue.use(VueRouter);
 
+export const REDIRECT_TO_QUERY_KEY = 'redirect-to';
+
 const routes = [
   {
     path: '/login',
