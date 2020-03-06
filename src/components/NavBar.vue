@@ -3,7 +3,7 @@
     <b-navbar>
       <template slot="brand">
         <b-navbar-item tag="router-link" to="/">
-          <img class="brand-logo" src="../assets/ganeti-logo.png" />
+          <img class="brand-logo" src="../assets/ganeti_logo.svg" />
         </b-navbar-item>
       </template>
       <template slot="start">
@@ -60,7 +60,20 @@ export default class NavBar extends Vue {
 </script>
 
 <style scoped>
-.brand-logo {
-  max-height: 3rem;
-}
+  #nav {
+    padding: 30px;
+  }
+
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
+
+  .brand-logo {
+    max-height: 3rem;
+  }
 </style>

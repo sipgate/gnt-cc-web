@@ -2,5 +2,6 @@ export default {
   Statistics: 'statistics',
   Instances: 'instances',
   Nodes: 'nodes',
-  Jobs: 'jobs'
+  Jobs: 'jobs',
+  Login: 'login'
 };

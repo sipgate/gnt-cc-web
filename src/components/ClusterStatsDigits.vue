@@ -44,32 +44,16 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import Api from '@/store/api';
 
 @Component({
   name: 'ClusterStatsDigits'
 })
 export default class ClusterStatsDigits extends Vue {
   async created () {
-    // const response = await fetch('/api/v1/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     username: 'admin',
-    //     password: 'admin'
-    //   })
-    // });
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODM1MDg4NDYsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MzQ5MDg0Nn0.uWEZ2Rc2TvqmF18X5fpprGTZdt98au6_OnyxfuO84L4';
-    const response = await fetch('/api/v1/clusters', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const json = await response.json();
-    console.log(json);
+    const clusters = await Api.get('clusters');
+
+    console.log(clusters);
   }
 };
 </script>

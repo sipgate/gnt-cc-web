@@ -1,16 +1,20 @@
 <template>
-  <router-view></router-view>
+  <div>
+    <NavBar />
+    <router-view/>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import NavBar from '@/components/NavBar.vue';
 
 @Component({
-  name: 'WrapperView'
+  name: 'WrapperView',
+  components: { NavBar }
 })
-export default class WrapperView extends Vue {
-};
+export default class WrapperView extends Vue {};
 </script>
 
 <style scoped>

@@ -1,0 +1,116 @@
+<template>
+  <div class="login">
+    <section class="logo">
+      <img class="brand-logo" src="../assets/ganeti_logo.svg" />
+    </section>
+    <section class="login-form">
+      <form @submit.prevent="login">
+        <b-field>
+          <b-input
+            icon="user"
+            placeholder="Username"
+            required
+            type="text"
+            v-model="credentials.username"
+          />
+        </b-field>
+        <b-field>
+          <b-input
+            password-reveal
+            icon="lock"
+            placeholder="Password"
+            required
+            type="password"
+            v-model="credentials.password"
+          />
+        </b-field>
+        <div class="login-error">
+          <p class="error">{{error}}</p>
+        </div>
+        <b-button :loading="loading" native-type="submit" type="is-primary">Login</b-button>
+      </form>
+    </section>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import ClusterStatsDigits from '@/components/ClusterStatsDigits.vue';
+import Component from 'vue-class-component';
+import Api from '@/store/api';
+import PageNames from '@/data/enum/PageNames';
+
+  @Component({
+    name: 'LoginView',
+    components: {
+      ClusterStatsDigits
+    }
+  })
+export default class LoginView extends Vue {
+    credentials = {
+      username: '',
+      password: ''
+    };
+
+    loading = false;
+    error = '';
+
+    async login () {
+      this.error = '';
+      this.loading = true;
+      const response = await Api.request('login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.credentials)
+      });
+      this.loading = false;
+
+      if (response.code === 401) {
+        this.error = 'Wrong username or password.';
+        return;
+      }
+
+      if (response.code === 500) {
+        this.error = 'Internal server error.';
+        return;
+      }
+
+      if (response.code !== 200) {
+        this.error = 'Unknown error.';
+        return;
+      }
+
+      await this.$store.dispatch('saveToken', response.token);
+      await this.$router.push({ name: PageNames.Statistics });
+    }
+};
+</script>
+
+<style scoped>
+  .login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+  }
+
+  .login .logo {
+    margin: 2rem 0;
+  }
+
+  .login .logo .brand-logo {
+    width: 160px;
+    height: auto;
+  }
+
+  .login .error {
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+  }
+</style>

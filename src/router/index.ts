@@ -1,18 +1,24 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Instances from '@/views/InstancesView.vue';
+import InstancesView from '@/views/InstancesView.vue';
 import StatisticsView from '@/views/StatisticsView.vue';
-import Nodes from '@/views/NodesView.vue';
-import Wrapper from '@/views/WrapperView.vue';
-import Jobs from '@/views/JobsView.vue';
+import NodesView from '@/views/NodesView.vue';
+import WrapperView from '@/views/WrapperView.vue';
+import JobsView from '@/views/JobsView.vue';
 import PageNames from '@/data/enum/PageNames';
+import LoginView from '@/views/LoginView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/login',
+    name: PageNames.Login,
+    component: LoginView
+  },
+  {
     path: '/:cluster',
-    component: Wrapper,
+    component: WrapperView,
     children: [
       {
         path: 'statistics',
@@ -22,17 +28,17 @@ const routes = [
       {
         path: 'instances',
         name: PageNames.Instances,
-        component: Instances
+        component: InstancesView
       },
       {
         path: 'nodes',
         name: PageNames.Nodes,
-        component: Nodes
+        component: NodesView
       },
       {
         path: 'jobs',
         name: PageNames.Jobs,
-        component: Jobs
+        component: JobsView
       }
     ]
   },
