@@ -44,17 +44,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import Api from '@/store/api';
 
 @Component({
   name: 'ClusterStatsDigits'
 })
 export default class ClusterStatsDigits extends Vue {
-  async created () {
-    const clusters = await Api.get('clusters');
-
-    console.log(clusters);
-  }
 };
 </script>
 

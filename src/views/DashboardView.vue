@@ -9,12 +9,17 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import NavBar from '@/components/NavBar.vue';
+import { Actions } from '@/store';
 
 @Component({
-  name: 'WrapperView',
+  name: 'DashboardView',
   components: { NavBar }
 })
-export default class WrapperView extends Vue {};
+export default class DashboardView extends Vue {
+  async created () {
+    await this.$store.dispatch(Actions.LoadClusters);
+  }
+};
 </script>
 
 <style scoped>

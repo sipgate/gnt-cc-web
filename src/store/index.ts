@@ -4,26 +4,33 @@ import Api from '@/store/api';
 
 Vue.use(Vuex);
 
-const initialState = {
+export interface State {
+  clusters: string[];
+}
 
+const initialState: State = {
+  clusters: []
 };
+
+export const Actions = { LoadClusters: 'loadClusters' };
 
 export default new Vuex.Store({
   state: initialState,
   mutations: {
-    // setClusters (state, clusters: Array<ClusterModel>) {
-    //   state.clusters = clusters;
-    // }
+    setClusters (state, clusters: string[]) {
+      state.clusters = clusters;
+    },
     setToken (state, token: string) {
       localStorage.setItem(Api.tokenStorageKey, token);
     }
   },
   actions: {
-    // setClusters (context, clusters: Array<ClusterModel>) {
-    //   context.commit('setClusters', clusters);
-    // },
-    async saveToken (context, token: string) {
-      context.commit('setToken', token);
+    async saveToken ({ commit }, token: string) {
+      commit('setToken', token);
+    },
+    async [Actions.LoadClusters] ({ commit }) {
+      const response = await Api.get('clusters');
+      commit('setClusters', response.clusters);
     }
   }
 });

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import InstancesView from '@/views/InstancesView.vue';
 import StatisticsView from '@/views/StatisticsView.vue';
 import NodesView from '@/views/NodesView.vue';
-import WrapperView from '@/views/WrapperView.vue';
+import DashboardView from '@/views/DashboardView.vue';
 import JobsView from '@/views/JobsView.vue';
 import PageNames from '@/data/enum/PageNames';
 import LoginView from '@/views/LoginView.vue';
@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/:cluster',
-    component: WrapperView,
+    component: DashboardView,
     children: [
       {
         path: 'statistics',
