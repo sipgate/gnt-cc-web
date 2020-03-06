@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="instances">
+    <ClusterNodesTable />
   </div>
 </template>
+
+<script>
+import ClusterNodesTable from '@/components/ClusterNodesTable';
+
+export default {
+  name: 'Instances',
+  components: {
+    ClusterNodesTable
+  }
+};
+</script>

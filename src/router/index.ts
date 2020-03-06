@@ -1,34 +1,42 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Instances from '../views/Instances.vue';
+import Statistics from '../views/Statistics.vue';
+import Nodes from '../views/Nodes.vue';
+import Wrapper from '../views/Wrapper.vue';
+import Jobs from '../views/Jobs.vue';
+import PageNames from '../data/enum/PageNames';
 
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '*', redirect: '/0' },
   {
     path: '/:cluster',
-    name: 'Home',
-    component: Home
+    component: Wrapper,
+    children: [
+      {
+        path: 'statistics',
+        name: PageNames.Statistics,
+        component: Statistics
+      },
+      {
+        path: 'instances',
+        name: PageNames.Instances,
+        component: Instances
+      },
+      {
+        path: 'nodes',
+        name: PageNames.Nodes,
+        component: Nodes
+      },
+      {
+        path: 'jobs',
+        name: PageNames.Jobs,
+        component: Jobs
+      }
+    ]
   },
-  {
-    path: '/:cluster/instances',
-    name: 'Instances',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Instances.vue')
-  },
-  {
-    path: '/:cluster/cluster',
-    name: 'Cluster',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cluster.vue')
-  },
-  {
-    path: '/:cluster/jobs',
-    name: 'Jobs',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Jobs.vue')
-  }
+  { path: '*', redirect: '/0' }
 ];
 
 const router = new VueRouter({
