@@ -29,31 +29,32 @@
   </div>
 </template>
 
-<script>
-import ClusterSelector from '@/components/ClusterSelector';
+<script lang="ts">
 import PageNames from '@/data/enum/PageNames';
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import ClusterSelector from '@/components/ClusterSelector.vue';
 
-export default {
+@Component({
   name: 'NavBar',
-  components: { ClusterSelector },
-
-  computed: {
-    links () {
-      return {
-        instances: {
-          name: PageNames.Instances
-        },
-        statistics: {
-          name: PageNames.Statistics
-        },
-        jobs: {
-          name: PageNames.Jobs
-        },
-        nodes: {
-          name: PageNames.Nodes
-        }
-      };
-    }
+  components: { ClusterSelector }
+})
+export default class NavBar extends Vue {
+  get links () {
+    return {
+      instances: {
+        name: PageNames.Instances
+      },
+      statistics: {
+        name: PageNames.Statistics
+      },
+      jobs: {
+        name: PageNames.Jobs
+      },
+      nodes: {
+        name: PageNames.Nodes
+      }
+    };
   }
 };
 </script>

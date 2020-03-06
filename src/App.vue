@@ -27,10 +27,15 @@
   color: #42b983;
 }
 </style>
-<script>
+<script lang="ts">
 import NavBar from '@/components/NavBar.vue';
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
-export default {
+@Component({
+  name: 'App',
   components: { NavBar }
+})
+export default class App extends Vue {
 };
 </script>

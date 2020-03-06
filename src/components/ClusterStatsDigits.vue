@@ -41,9 +41,14 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+@Component({
   name: 'ClusterStatsDigits'
+})
+export default class ClusterStatsDigits extends Vue {
 };
 </script>
 

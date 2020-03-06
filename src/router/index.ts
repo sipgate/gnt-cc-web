@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Instances from '../views/Instances.vue';
-import Statistics from '../views/Statistics.vue';
-import Nodes from '../views/Nodes.vue';
-import Wrapper from '../views/Wrapper.vue';
-import Jobs from '../views/Jobs.vue';
-import PageNames from '../data/enum/PageNames';
+import Instances from '@/views/InstancesView.vue';
+import StatisticsView from '@/views/StatisticsView.vue';
+import Nodes from '@/views/NodesView.vue';
+import Wrapper from '@/views/WrapperView.vue';
+import Jobs from '@/views/JobsView.vue';
+import PageNames from '@/data/enum/PageNames';
 
 Vue.use(VueRouter);
 
@@ -17,7 +17,7 @@ const routes = [
       {
         path: 'statistics',
         name: PageNames.Statistics,
-        component: Statistics
+        component: StatisticsView
       },
       {
         path: 'instances',
