@@ -40,19 +40,35 @@ import ClusterSelector from '@/components/ClusterSelector.vue';
   components: { ClusterSelector }
 })
 export default class NavBar extends Vue {
+  get currentCluster (): string {
+    return this.$route.params.cluster;
+  }
+
   get links () {
     return {
       instances: {
-        name: PageNames.Instances
+        name: PageNames.Instances,
+        params: {
+          cluster: this.currentCluster
+        }
       },
       statistics: {
-        name: PageNames.Statistics
+        name: PageNames.Statistics,
+        params: {
+          cluster: this.currentCluster
+        }
       },
       jobs: {
-        name: PageNames.Jobs
+        name: PageNames.Jobs,
+        params: {
+          cluster: this.currentCluster
+        }
       },
       nodes: {
-        name: PageNames.Nodes
+        name: PageNames.Nodes,
+        params: {
+          cluster: this.currentCluster
+        }
       }
     };
   }
