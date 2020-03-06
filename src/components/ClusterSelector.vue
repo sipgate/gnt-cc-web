@@ -1,37 +1,31 @@
 <template>
-  <div>
-    <div class="columns">
-      <div class="column" v-if="clusters !== undefined && $route.params.cluster !== undefined">
-        <p v-text="$route.params.cluster"/>
-      </div>
-      <b-navbar-dropdown label="Cluster">
-        <b-navbar-item v-for="cluster in clusters" v-bind:key="cluster">
-          <router-link :to="{params: { cluster: cluster }}" class="dropdown-item">{{ cluster }}</router-link>
-        </b-navbar-item>
-      </b-navbar-dropdown>
-    </div>
+  <div class="cluster-selector">
+    <b-navbar-dropdown :label="currentCluster">
+      <b-navbar-item v-for="cluster in clusters" v-bind:key="cluster">
+        <router-link :to="{ params: { cluster: cluster } }" class="dropdown-item">{{ cluster }}</router-link>
+      </b-navbar-item>
+    </b-navbar-dropdown>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { mapState } from 'vuex';
-import { State } from '@/store';
+import { State } from 'vuex-class';
+import { StoreState } from '@/store';
 
 @Component({
-  name: 'ClusterSelector',
-  computed: mapState({
-    clusters: (state: State): string[] => state.clusters
-  })
+  name: 'ClusterSelector'
 })
 export default class ClusterSelector extends Vue {
-  clusters!: string[]
+  @State((state: StoreState) => state.clusters) clusters!: string[];
+
+  get currentCluster (): string {
+    return this.$route.params.cluster || '';
+  }
 };
 </script>
 
 <style scoped>
-  .column {
-    margin-right: 2em;
-  }
+  .cluster-selector {}
 </style>

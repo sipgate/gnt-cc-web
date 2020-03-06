@@ -19,7 +19,7 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/:cluster',
+    path: '/:cluster?',
     component: DashboardView,
     children: [
       {
@@ -43,8 +43,8 @@ const routes = [
         component: JobsView
       }
     ]
-  },
-  { path: '*', redirect: '/0' }
+  }
+  // { path: '*', redirect: '/0' }
 ];
 
 const router = new VueRouter({

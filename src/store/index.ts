@@ -4,11 +4,11 @@ import Api from '@/store/api';
 
 Vue.use(Vuex);
 
-export interface State {
+export interface StoreState {
   clusters: string[];
 }
 
-const initialState: State = {
+const initialState: StoreState = {
   clusters: []
 };
 
@@ -31,6 +31,7 @@ export default new Vuex.Store({
     async [Actions.LoadClusters] ({ commit }) {
       const response = await Api.get('clusters');
       commit('setClusters', response.clusters);
+      return response.clusters;
     }
   }
 });

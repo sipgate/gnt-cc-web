@@ -17,7 +17,19 @@ import { Actions } from '@/store';
 })
 export default class DashboardView extends Vue {
   async created () {
-    await this.$store.dispatch(Actions.LoadClusters);
+    const clusters = await this.$store.dispatch(Actions.LoadClusters);
+
+    if (
+      typeof this.$route.params.cluster === 'undefined' &&
+      typeof clusters !== 'undefined' &&
+      clusters.length > 0
+    ) {
+      await this.$router.replace({
+        params: {
+          cluster: clusters[0]
+        }
+      });
+    }
   }
 };
 </script>
