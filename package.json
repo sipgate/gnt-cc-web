@@ -1,5 +1,5 @@
 {
-  "name": "ganeti-control-center-v2",
+  "name": "gnt-cc-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {

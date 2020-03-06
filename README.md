@@ -1,8 +1,8 @@
-# ganeti-control-center-v2
+# gnt-cc-web
 
 ## Project setup
 ```
-yarn install
+yarn instally
 ```
 
 ### Compiles and hot-reloads for development
