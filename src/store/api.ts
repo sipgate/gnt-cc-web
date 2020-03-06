@@ -1,3 +1,11 @@
+import PageNames from '@/data/enum/PageNames';
+import router from '@/router';
+
+interface Credentials {
+  username: string;
+  password: string;
+}
+
 export default class Api {
   static readonly tokenStorageKey = 'gnt-cc-token';
 
@@ -6,7 +14,7 @@ export default class Api {
       method: 'GET'
     };
 
-    return Api.authenticatedRequest(slug, options);
+    return Api.request(slug, options);
   }
 
   static async post (slug: string, body: object) {
@@ -18,10 +26,10 @@ export default class Api {
       }
     };
 
-    return Api.authenticatedRequest(slug, options);
+    return Api.request(slug, options);
   }
 
-  static async authenticatedRequest (slug: string, options: any) {
+  static async request (slug: string, options: any) {
     options = {
       ...options,
       headers: {
@@ -30,18 +38,32 @@ export default class Api {
       }
     };
 
-    return Api.request(slug, options);
+    const response = await fetch(Api.buildUrl(slug), options);
+
+    if (response.status === 401) {
+      router.push({ name: PageNames.Login });
+    }
+
+    return response.json();
   }
 
-  static async request (slug: string, options: any) {
+  static async login (credentials: Credentials) {
+    const response = await fetch(Api.buildUrl('login'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    });
+
+    return response.json();
+  }
+
+  private static buildUrl (slug: string) {
     if (slug.length > 0 && slug[0] === '/') {
       slug = slug.slice(1);
     }
 
-    const url = `/api/v1/${slug}`;
-
-    const response = await fetch(url, options);
-
-    return response.json();
+    return `/api/v1/${slug}`;
   }
 }

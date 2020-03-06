@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
-import 'buefy/dist/buefy.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faCheck,

@@ -58,13 +58,7 @@ export default class LoginView extends Vue {
     async login () {
       this.error = '';
       this.loading = true;
-      const response = await Api.request('login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.credentials)
-      });
+      const response = await Api.login(this.credentials);
       this.loading = false;
 
       if (response.code === 401) {
@@ -88,29 +82,29 @@ export default class LoginView extends Vue {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 4rem;
-  }
 
-  .login .logo {
-    margin: 2rem 0;
-  }
+    .logo {
+      margin: 2rem 0;
 
-  .login .logo .brand-logo {
-    width: 160px;
-    height: auto;
-  }
+      .brand-logo {
+        width: 160px;
+        height: auto;
+      }
+    }
 
-  .login .error {
-    height: 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
+    .error {
+      height: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: red;
+    }
   }
 </style>
