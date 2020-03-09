@@ -23,7 +23,7 @@ const routes = [
     component: DashboardView,
     children: [
       {
-        path: 'statistics',
+        path: '',
         name: PageNames.Statistics,
         component: StatisticsView
       },
@@ -44,7 +44,6 @@ const routes = [
       }
     ]
   }
-  // { path: '*', redirect: '/0' }
 ];
 
 const router = new VueRouter({

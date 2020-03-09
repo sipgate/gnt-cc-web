@@ -1,5 +1,6 @@
 import PageNames from '@/data/enum/PageNames';
 import router, { REDIRECT_TO_QUERY_KEY } from '@/router';
+import { Dictionary } from 'vue-router/types/router';
 
 interface Credentials {
   username: string;
@@ -41,7 +42,13 @@ export default class Api {
     const response = await fetch(Api.buildUrl(slug), options);
 
     if (response.status === 401) {
-      await router.push({ name: PageNames.Login, query: { [REDIRECT_TO_QUERY_KEY]: router.currentRoute.path } });
+      const query: Dictionary<string | (string | null)[]> = {};
+
+      if (router.currentRoute.path.replace('/', '') !== '') {
+        query[REDIRECT_TO_QUERY_KEY] = router.currentRoute.path;
+      }
+
+      await router.push({ name: PageNames.Login, query });
     }
 
     return response.json();
