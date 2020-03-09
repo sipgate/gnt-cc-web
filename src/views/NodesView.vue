@@ -3,12 +3,8 @@
     <b-table
       :data="nodes"
       :columns="columns"
-      :paginated="true"
-      :pagination-simple="false"
-      :pagination-position="paginationPosition"
-      :default-sort-direction="defaultSortDirection"
-      :sort-icon-size="sortIconSize"
-      :per-page="20"
+      default-sort-direction="asc"
+      sort-icon-size="small"
     />
   </div>
 </template>
@@ -30,10 +26,6 @@ export default class NodesView extends Vue {
   onCurrentClusterChanged () {
     this.loadNodes();
   }
-
-  paginationPosition = 'bottom';
-  defaultSortDirection = 'asc';
-  sortIconSize = 'small';
 
   async created () {
     if (this.currentCluster.length > 0) {
