@@ -1,11 +1,27 @@
 <template>
   <div class="instances">
-    <b-table
-      :data="instances"
-      :columns="columns"
-      default-sort-direction="asc"
-      sort-icon-size="small"
-    />
+    <b-table :data="instances" default-sort-direction="asc" sort-icon-size="small">
+      <template slot-scope="data">
+        <b-table-column label="Name" field="name" searchable sortable>
+          {{ data.row.name }}
+        </b-table-column>
+        <b-table-column label="Primary Node" field="primaryNode" searchable sortable>
+          {{ data.row.primaryNode }}
+        </b-table-column>
+        <b-table-column label="Secondary Nodes" field="secondaryNodes" searchable sortable>
+          {{ data.row.secondaryNodes[0] }}
+          <b-tag rounded v-if="data.row.secondaryNodes.length > 1">
+            +{{ data.row.secondaryNodes.length - 1 }}
+          </b-tag>
+        </b-table-column>
+        <b-table-column label="vCPUs" field="cpuCount" sortable>
+          {{ data.row.cpuCount }}
+        </b-table-column>
+        <b-table-column label="Memory" field="memoryTotal" sortable>
+          {{ data.row.memoryTotal }} MB
+        </b-table-column>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -46,29 +62,6 @@ export default class InstancesView extends Vue {
 
   get currentCluster(): string {
     return this.$route.params.cluster;
-  }
-
-  get columns() {
-    return [
-      {
-        field: "name",
-        label: "Name",
-        searchable: true,
-        sortable: true
-      },
-      {
-        field: "primaryNode",
-        label: "Primary Node",
-        searchable: false,
-        sortable: true
-      },
-      {
-        field: "secondaryNodes",
-        label: "Secondary Nodes",
-        searchable: false,
-        sortable: true
-      }
-    ];
   }
 }
 </script>
