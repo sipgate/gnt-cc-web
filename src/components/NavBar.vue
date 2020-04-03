@@ -22,7 +22,7 @@
       </template>
       <template slot="end">
         <b-navbar-item tag="div">
-          <ClusterSelector/>
+          <ClusterSelector />
         </b-navbar-item>
       </template>
     </b-navbar>
@@ -30,21 +30,21 @@
 </template>
 
 <script lang="ts">
-import PageNames from '@/data/enum/PageNames';
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import ClusterSelector from '@/components/ClusterSelector.vue';
+import PageNames from "@/data/enum/PageNames";
+import Vue from "vue";
+import Component from "vue-class-component";
+import ClusterSelector from "@/components/ClusterSelector.vue";
 
 @Component({
-  name: 'NavBar',
+  name: "NavBar",
   components: { ClusterSelector }
 })
 export default class NavBar extends Vue {
-  get currentCluster (): string {
+  get currentCluster(): string {
     return this.$route.params.cluster;
   }
 
-  get links () {
+  get links() {
     return {
       statistics: {
         name: PageNames.Statistics,
@@ -72,24 +72,24 @@ export default class NavBar extends Vue {
       }
     };
   }
-};
+}
 </script>
 
 <style scoped>
-  #nav {
-    padding: 30px;
-  }
+#nav {
+  padding: 30px;
+}
 
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
 
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
 
-  .brand-logo {
-    max-height: 3rem;
-  }
+.brand-logo {
+  max-height: 3rem;
+}
 </style>

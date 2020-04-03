@@ -1,6 +1,6 @@
-import PageNames from '@/data/enum/PageNames';
-import router, { REDIRECT_TO_QUERY_KEY } from '@/router';
-import { Dictionary } from 'vue-router/types/router';
+import PageNames from "@/data/enum/PageNames";
+import router, { REDIRECT_TO_QUERY_KEY } from "@/router";
+import { Dictionary } from "vue-router/types/router";
 
 interface Credentials {
   username: string;
@@ -8,29 +8,29 @@ interface Credentials {
 }
 
 export default class Api {
-  static readonly tokenStorageKey = 'gnt-cc-token';
+  static readonly tokenStorageKey = "gnt-cc-token";
 
-  static async get (slug: string) {
+  static async get(slug: string) {
     const options = {
-      method: 'GET'
+      method: "GET"
     };
 
     return Api.request(slug, options);
   }
 
-  static async post (slug: string, body: object) {
+  static async post(slug: string, body: object) {
     const options = {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(body),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
 
     return Api.request(slug, options);
   }
 
-  static async request (slug: string, options: any) {
+  static async request(slug: string, options: any) {
     options = {
       ...options,
       headers: {
@@ -44,7 +44,7 @@ export default class Api {
     if (response.status === 401) {
       const query: Dictionary<string | (string | null)[]> = {};
 
-      if (router.currentRoute.path.replace('/', '') !== '') {
+      if (router.currentRoute.path.replace("/", "") !== "") {
         query[REDIRECT_TO_QUERY_KEY] = router.currentRoute.path;
       }
 
@@ -54,11 +54,11 @@ export default class Api {
     return response.json();
   }
 
-  static async login (credentials: Credentials) {
-    const response = await fetch(Api.buildUrl('login'), {
-      method: 'POST',
+  static async login(credentials: Credentials) {
+    const response = await fetch(Api.buildUrl("login"), {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(credentials)
     });
@@ -66,8 +66,8 @@ export default class Api {
     return response.json();
   }
 
-  private static buildUrl (slug: string) {
-    if (slug.length > 0 && slug[0] === '/') {
+  private static buildUrl(slug: string) {
+    if (slug.length > 0 && slug[0] === "/") {
       slug = slug.slice(1);
     }
 

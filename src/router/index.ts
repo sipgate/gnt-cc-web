@@ -1,44 +1,44 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import InstancesView from '@/views/InstancesView.vue';
-import StatisticsView from '@/views/StatisticsView.vue';
-import NodesView from '@/views/NodesView.vue';
-import DashboardView from '@/views/DashboardView.vue';
-import JobsView from '@/views/JobsView.vue';
-import PageNames from '@/data/enum/PageNames';
-import LoginView from '@/views/LoginView.vue';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import InstancesView from "@/views/InstancesView.vue";
+import StatisticsView from "@/views/StatisticsView.vue";
+import NodesView from "@/views/NodesView.vue";
+import DashboardView from "@/views/DashboardView.vue";
+import JobsView from "@/views/JobsView.vue";
+import PageNames from "@/data/enum/PageNames";
+import LoginView from "@/views/LoginView.vue";
 
 Vue.use(VueRouter);
 
-export const REDIRECT_TO_QUERY_KEY = 'redirect-to';
+export const REDIRECT_TO_QUERY_KEY = "redirect-to";
 
 const routes = [
   {
-    path: '/login',
+    path: "/login",
     name: PageNames.Login,
     component: LoginView
   },
   {
-    path: '/:cluster?',
+    path: "/:cluster?",
     component: DashboardView,
     children: [
       {
-        path: '',
+        path: "",
         name: PageNames.Statistics,
         component: StatisticsView
       },
       {
-        path: 'instances',
+        path: "instances",
         name: PageNames.Instances,
         component: InstancesView
       },
       {
-        path: 'nodes',
+        path: "nodes",
         name: PageNames.Nodes,
         component: NodesView
       },
       {
-        path: 'jobs',
+        path: "jobs",
         name: PageNames.Jobs,
         component: JobsView
       }
@@ -47,7 +47,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
 });

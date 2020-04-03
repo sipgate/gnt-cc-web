@@ -1,27 +1,27 @@
 <template>
   <div>
     <NavBar />
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import NavBar from '@/components/NavBar.vue';
-import { Actions } from '@/store';
+import Vue from "vue";
+import Component from "vue-class-component";
+import NavBar from "@/components/NavBar.vue";
+import { Actions } from "@/store";
 
 @Component({
-  name: 'DashboardView',
+  name: "DashboardView",
   components: { NavBar }
 })
 export default class DashboardView extends Vue {
-  async created () {
+  async created() {
     const clusters = await this.$store.dispatch(Actions.LoadClusters);
 
     if (
-      typeof this.$route.params.cluster === 'undefined' &&
-      typeof clusters !== 'undefined' &&
+      typeof this.$route.params.cluster === "undefined" &&
+      typeof clusters !== "undefined" &&
       clusters.length > 0
     ) {
       await this.$router.replace({
@@ -31,9 +31,7 @@ export default class DashboardView extends Vue {
       });
     }
   }
-};
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

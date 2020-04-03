@@ -1,7 +1,7 @@
 export default {
-  Statistics: 'statistics',
-  Instances: 'instances',
-  Nodes: 'nodes',
-  Jobs: 'jobs',
-  Login: 'login'
+  Statistics: "statistics",
+  Instances: "instances",
+  Nodes: "nodes",
+  Jobs: "jobs",
+  Login: "login"
 };

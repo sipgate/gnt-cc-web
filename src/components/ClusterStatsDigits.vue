@@ -42,14 +42,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import Vue from "vue";
+import Component from "vue-class-component";
 
 @Component({
-  name: 'ClusterStatsDigits'
+  name: "ClusterStatsDigits"
 })
-export default class ClusterStatsDigits extends Vue {
-};
+export default class ClusterStatsDigits extends Vue {}
 </script>
 
 <style scoped>

@@ -5,21 +5,20 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import ClusterStatsDigits from '@/components/ClusterStatsDigits.vue';
-import Component from 'vue-class-component';
+import Vue from "vue";
+import ClusterStatsDigits from "@/components/ClusterStatsDigits.vue";
+import Component from "vue-class-component";
 
 @Component({
-  name: 'Statistics',
+  name: "Statistics",
   components: {
     ClusterStatsDigits
   }
 })
-export default class StatisticsView extends Vue {
-
-};
+export default class StatisticsView extends Vue {}
 </script>
 
 <style scoped>
-  .statistics {}
+.statistics {
+}
 </style>
