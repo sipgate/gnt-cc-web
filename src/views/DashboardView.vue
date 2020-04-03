@@ -10,6 +10,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import NavBar from "@/components/NavBar.vue";
 import { Actions } from "@/store";
+import Params from '@/data/enum/Params';
 
 @Component({
   name: "DashboardView",
@@ -20,7 +21,7 @@ export default class DashboardView extends Vue {
     const clusters = await this.$store.dispatch(Actions.LoadClusters);
 
     if (
-      typeof this.$route.params.cluster === "undefined" &&
+      typeof this.$route.params[Params.Cluster] === "undefined" &&
       typeof clusters !== "undefined" &&
       clusters.length > 0
     ) {

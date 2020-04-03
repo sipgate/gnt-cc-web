@@ -15,6 +15,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { State } from "vuex-class";
 import { StoreState } from "@/store";
+import Params from '@/data/enum/Params';
 
 @Component({
   name: "ClusterSelector"
@@ -23,7 +24,7 @@ export default class ClusterSelector extends Vue {
   @State((state: StoreState) => state.clusters) clusters!: string[];
 
   get currentCluster(): string {
-    return this.$route.params.cluster || "";
+    return this.$route.params[Params.Cluster] || "";
   }
 }
 </script>

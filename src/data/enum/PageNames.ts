@@ -3,5 +3,6 @@ export default {
   Instances: "instances",
   Nodes: "nodes",
   Jobs: "jobs",
-  Login: "login"
+  Login: "login",
+  InstancesDetail: 'instancesDetail',
 };

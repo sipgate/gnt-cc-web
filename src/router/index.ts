@@ -7,6 +7,8 @@ import DashboardView from "@/views/DashboardView.vue";
 import JobsView from "@/views/JobsView.vue";
 import PageNames from "@/data/enum/PageNames";
 import LoginView from "@/views/LoginView.vue";
+import Params from '@/data/enum/Params';
+import InstancesDetailView from '@/views/InstanceDetailView.vue';
 
 Vue.use(VueRouter);
 
@@ -19,7 +21,7 @@ const routes = [
     component: LoginView
   },
   {
-    path: "/:cluster?",
+    path: `/:${Params.Cluster}?`,
     component: DashboardView,
     children: [
       {
@@ -31,6 +33,11 @@ const routes = [
         path: "instances",
         name: PageNames.Instances,
         component: InstancesView
+      },
+      {
+        path: `instances/:${Params.InstanceName}`,
+        name: PageNames.InstancesDetail,
+        component: InstancesDetailView,
       },
       {
         path: "nodes",

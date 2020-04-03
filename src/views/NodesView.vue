@@ -11,6 +11,7 @@ import { Actions, StoreState } from "@/store";
 import { State } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 import GntNode from "@/model/GntNode";
+import Params from '@/data/enum/Params';
 
 @Component<NodesView>({
   name: "NodesView"
@@ -36,7 +37,7 @@ export default class NodesView extends Vue {
   }
 
   get currentCluster(): string {
-    return this.$route.params.cluster;
+    return this.$route.params[Params.Cluster];
   }
 
   get nodes(): GntNode[] {

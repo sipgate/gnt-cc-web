@@ -34,6 +34,7 @@ import PageNames from "@/data/enum/PageNames";
 import Vue from "vue";
 import Component from "vue-class-component";
 import ClusterSelector from "@/components/ClusterSelector.vue";
+import Params from '@/data/enum/Params';
 
 @Component({
   name: "NavBar",
@@ -41,7 +42,7 @@ import ClusterSelector from "@/components/ClusterSelector.vue";
 })
 export default class NavBar extends Vue {
   get currentCluster(): string {
-    return this.$route.params.cluster;
+    return this.$route.params[Params.Cluster];
   }
 
   get links() {

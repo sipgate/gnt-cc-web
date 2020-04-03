@@ -3,12 +3,14 @@
     <b-table :data="instances" default-sort-direction="asc" sort-icon-size="small">
       <template slot-scope="data">
         <b-table-column label="Name" field="name" searchable sortable>
-          {{ data.row.name }}
+          <router-link :to="createInstanceLink(data.row.name)">
+            {{ data.row.name }}
+          </router-link>
         </b-table-column>
         <b-table-column label="Primary Node" field="primaryNode" searchable sortable>
           {{ data.row.primaryNode }}
         </b-table-column>
-        <b-table-column label="Secondary Nodes" field="secondaryNodes" searchable sortable>
+        <b-table-column label="Secondary Node(s)" field="secondaryNodes" searchable sortable>
           {{ data.row.secondaryNodes[0] }}
           <b-tag rounded v-if="data.row.secondaryNodes.length > 1">
             +{{ data.row.secondaryNodes.length - 1 }}
@@ -32,6 +34,9 @@ import { Actions, StoreState } from "@/store";
 import { State } from "vuex-class";
 import GntInstance from "@/model/GntInstance";
 import { Watch } from "vue-property-decorator";
+import { Location, RouteConfig } from 'vue-router';
+import PageNames from "@/data/enum/PageNames";
+import Params from '@/data/enum/Params';
 
 @Component({
   name: "InstancesView"
@@ -61,7 +66,17 @@ export default class InstancesView extends Vue {
   }
 
   get currentCluster(): string {
-    return this.$route.params.cluster;
+    return this.$route.params[Params.Cluster];
+  }
+
+  createInstanceLink(name: string): Location {
+    return {
+      name: PageNames.InstancesDetail,
+      params: {
+        [Params.Cluster]: this.currentCluster,
+        [Params.InstanceName]: name
+      }
+    };
   }
 }
 </script>
