@@ -15,6 +15,7 @@ import Vue from 'vue';
 import { Actions, StoreState } from '@/store';
 import { State } from 'vuex-class';
 import { Watch } from 'vue-property-decorator';
+import GntNode from '@/model/GntNode';
 
 @Component<NodesView>({
   name: 'NodesView'
