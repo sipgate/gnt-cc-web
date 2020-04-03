@@ -3467,7 +3467,7 @@ eslint-plugin-node@^11.0.0:
     resolve "^1.10.1"
     semver "^6.1.0"
 
-eslint-plugin-prettier@^3.1.1:
+eslint-plugin-prettier@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.1.2.tgz#432e5a667666ab84ce72f945c72f77d996a5c9ba"
   integrity sha512-GlolCC9y3XZfv3RQfwGew7NnuFDKsfI4lbvRK+PIIo23SFH+LemGs4cKwzAaRa+Mdb+lQO/STaIayno8T5sJJA==
@@ -8849,7 +8849,7 @@ vue-class-component@^7.1.0, vue-class-component@^7.2.2:
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.3.tgz#a5b1abd53513a72ad51098752e2dedd499807cca"
   integrity sha512-oEqYpXKaFN+TaXU+mRLEx8dX0ah85aAJEe61mpdoUrq0Bhe/6sWhyZX1JjMQLhVsHAkncyhedhmCdDVSasUtDw==
 
-vue-cli-plugin-prettier@~0.0.1:
+vue-cli-plugin-prettier@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-prettier/-/vue-cli-plugin-prettier-0.0.1.tgz#f776ffdaff5eb0435c4e4396f40c864a64706dce"
   integrity sha512-eSaDPcgka88GBMgpod7vKsYQEIGf4VIJY9uUKYes56Dq40rQP/Tp0pOwVhMafsRtjgwnW+DVlCpUTy6/9V13FA==
