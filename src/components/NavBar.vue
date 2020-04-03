@@ -34,7 +34,7 @@ import PageNames from "@/data/enum/PageNames";
 import Vue from "vue";
 import Component from "vue-class-component";
 import ClusterSelector from "@/components/ClusterSelector.vue";
-import Params from '@/data/enum/Params';
+import Params from "@/data/enum/Params";
 
 @Component({
   name: "NavBar",
@@ -79,6 +79,7 @@ export default class NavBar extends Vue {
 <style scoped>
 #nav {
   padding: 30px;
+  background: #ffffff;
 }
 
 #nav a {

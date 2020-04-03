@@ -20,37 +20,27 @@
       </div>
     </section>
 
-    <section class="stats section" v-if="instance">
-      <div class="container">
-        <nav class="level">
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Memory</p>
-              <p class="title">{{ instance.memoryTotal }}</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Following</p>
-              <p class="title">123</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Followers</p>
-              <p class="title">456K</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Likes</p>
-              <p class="title">789</p>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </section>
+    <div class="grid">
+      <Card title="memory" subtitle="MB">{{ instance.memoryTotal }}</Card>
+      <Card title="vcpu">{{ instance.cpuCount }}</Card>
+      <Card title="Dummy" subtitle="GB">42</Card>
+      <Card title="Dummy">12345</Card>
 
+      <section class="quick-info  cards" v-if="instance">
+        <Card title="Nodes" :subtitle="`Total: ${instance.secondaryNodes.length + 1}`">
+          <div class="nodes">
+            <div class="node">
+              {{ instance.primaryNode }}
+              <b-tag rounded>primary</b-tag>
+            </div>
+            <div class="node" v-for="node in instance.secondaryNodes" :key="node">
+              <span>{{ node }}</span>
+            </div>
+          </div>
+        </Card>
+      </section>
+    </div>
+    <!--
     <section class="quick-info" v-if="instance">
       <div class="container">
         <div class="columns">
@@ -80,9 +70,7 @@
             </div>
           </div>
 
-
-
-          <!--<ul>
+          <ul>
             <li>
               <router-link class="node" to="#">{{ instance.primaryNode }}</router-link>
                 <b-tag type="is-dark">Primary</b-tag>
@@ -90,10 +78,10 @@
             <li v-for="node in instance.secondaryNodes" :key="node">
               <router-link class="node" to="#">{{ node }}</router-link>
             </li>
-          </ul>-->
+          </ul>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
@@ -105,9 +93,11 @@ import { State } from "vuex-class";
 import GntInstance from "@/model/GntInstance";
 import { Watch } from "vue-property-decorator";
 import Params from "@/data/enum/Params";
+import Card from "@/components/Card.vue";
 
 @Component({
-  name: "InstanceDetailView"
+  name: "InstanceDetailView",
+  components: { Card }
 })
 export default class InstanceDetailView extends Vue {
   @State((state: StoreState) => state.instances) allInstances!: Record<string, GntInstance[]>;
@@ -157,5 +147,43 @@ export default class InstanceDetailView extends Vue {
       margin-left: 1rem;
     }
   }
+}
+
+section.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-area: stats;
+}
+
+section.quick-info {
+  grid-area: quickstats;
+}
+
+div.nodes {
+  font-size: 1rem;
+  text-align: left;
+  margin: 0.5rem 0;
+  div.node {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 2.5rem;
+  }
+}
+
+div.grid {
+  display: grid;
+  margin: 3rem;
+  row-gap: 3rem;
+  column-gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+    "stats stats stats stats"
+    "quickstats none none none";
 }
 </style>

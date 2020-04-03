@@ -10,7 +10,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import NavBar from "@/components/NavBar.vue";
 import { Actions } from "@/store";
-import Params from '@/data/enum/Params';
+import Params from "@/data/enum/Params";
 
 @Component({
   name: "DashboardView",

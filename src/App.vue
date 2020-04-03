@@ -72,6 +72,7 @@ $link-focus-border: $primary;
 body {
   padding: 0;
   margin: 0;
+  background: #fbfbfd;
 }
 
 * {

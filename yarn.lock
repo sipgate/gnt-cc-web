@@ -8849,11 +8849,6 @@ vue-class-component@^7.1.0, vue-class-component@^7.2.2:
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.3.tgz#a5b1abd53513a72ad51098752e2dedd499807cca"
   integrity sha512-oEqYpXKaFN+TaXU+mRLEx8dX0ah85aAJEe61mpdoUrq0Bhe/6sWhyZX1JjMQLhVsHAkncyhedhmCdDVSasUtDw==
 
-vue-cli-plugin-prettier@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-prettier/-/vue-cli-plugin-prettier-0.0.1.tgz#f776ffdaff5eb0435c4e4396f40c864a64706dce"
-  integrity sha512-eSaDPcgka88GBMgpod7vKsYQEIGf4VIJY9uUKYes56Dq40rQP/Tp0pOwVhMafsRtjgwnW+DVlCpUTy6/9V13FA==
-
 vue-eslint-parser@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.0.0.tgz#a4ed2669f87179dedd06afdd8736acbb3a3864d6"
