@@ -1,6 +1,6 @@
 <template>
-  <button class="button-round" @click.prevent="onClick">
-    <b-icon :icon="icon" :size="iconSize" />
+  <button class="button-round" :class="size" @click.prevent="onClick" :disabled="disabled">
+    <b-icon :icon="icon" :size="size" />
   </button>
 </template>
 
@@ -16,7 +16,7 @@ export default class ButtonRound extends Vue {
   @Prop(String)
   readonly icon!: string;
   @Prop({ default: "is-small" })
-  readonly iconSize!: string;
+  readonly size!: string;
   @Prop({ default: false })
   readonly disabled!: boolean;
 
@@ -30,14 +30,27 @@ export default class ButtonRound extends Vue {
 
 <style scoped lang="scss">
 .button-round {
-  border: 1px solid #3e3f42;
+  border: 1px solid #555;
   background: none;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
-
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
+  color: #555;
+
+  &.is-small {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.is-medium {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.is-large {
+    width: 48px;
+    height: 48px;
+  }
 }
 </style>

@@ -21,10 +21,38 @@
     </section>
 
     <div class="grid" v-if="instance">
-      <Card title="memory" subtitle="MB">{{ instance.memoryTotal }}</Card>
-      <Card title="vcpu">{{ instance.cpuCount }}</Card>
-      <Card title="Dummy" subtitle="GB">42</Card>
-      <Card title="Dummy">12345</Card>
+      <CardNumber
+        title="memory"
+        unit="MB"
+        :startValue="instance.memoryTotal"
+        :minimumValue="512"
+        :maximumValue="8192"
+        :step="256"
+      />
+      <CardNumber
+        title="vcpu"
+        unit="cores"
+        :startValue="instance.cpuCount"
+        :minimumValue="1"
+        :maximumValue="16"
+      />
+      <CardNumber
+        title="disk"
+        unit="GB"
+        :startValue="50"
+        :minimumValue="0"
+        :maximumValue="120"
+        :step="5"
+      />
+      <CardNumber
+        title="Dummy"
+        unit="bananen"
+        :startValue="30000"
+        :minimumValue="10000"
+        :maximumValue="50000"
+        :step="5000"
+        :is-editable="false"
+      />
 
       <section class="quick-info  cards" v-if="instance">
         <Card title="Nodes" :subtitle="`Total: ${instance.secondaryNodes.length + 1}`">
@@ -40,48 +68,6 @@
         </Card>
       </section>
     </div>
-    <!--
-    <section class="quick-info" v-if="instance">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-one-third">
-            <div class="nodes card">
-              <header class="card-header">
-                <p class="card-header-title">Nodes</p>
-              </header>
-
-              <div class="card-content">
-                <div class="content">
-                  <div class="node field">
-                    <b-taglist attached>
-                      <b-tag type="is-dark">{{ instance.primaryNode }}</b-tag>
-                      <b-tag type="is-success">primary</b-tag>
-                    </b-taglist>
-                  </div>
-
-                  <div class="node field" v-for="node in instance.secondaryNodes" :key="node">
-                    <b-taglist attached>
-                      <b-tag type="is-dark">{{ node }}</b-tag>
-                      <b-tag type="is-info">secondary</b-tag>
-                    </b-taglist>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <ul>
-            <li>
-              <router-link class="node" to="#">{{ instance.primaryNode }}</router-link>
-                <b-tag type="is-dark">Primary</b-tag>
-            </li>
-            <li v-for="node in instance.secondaryNodes" :key="node">
-              <router-link class="node" to="#">{{ node }}</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section> -->
   </div>
 </template>
 
@@ -94,10 +80,11 @@ import GntInstance from "@/model/GntInstance";
 import { Watch } from "vue-property-decorator";
 import Params from "@/data/enum/Params";
 import Card from "@/components/Card.vue";
+import CardNumber from "@/components/CardNumber.vue";
 
 @Component({
   name: "InstanceDetailView",
-  components: { Card }
+  components: { Card, CardNumber }
 })
 export default class InstanceDetailView extends Vue {
   @State((state: StoreState) => state.instances) allInstances!: Record<string, GntInstance[]>;

@@ -1,0 +1,228 @@
+<template>
+  <Card class="card-number" :title="title" :subtitle="unit" :noHorizontalPadding="true">
+    <button
+      slot="title-left"
+      class="interaction reset"
+      :class="{ hidden: !isDirty && isValid }"
+      @click="onReset"
+    >
+      <b-icon icon="undo" />
+    </button>
+
+    <button
+      slot="title-right"
+      class="interaction accept"
+      :class="{ hidden: !isDirty || !isValid }"
+      @click="onAccept"
+    >
+      <b-icon icon="check" />
+    </button>
+
+    <div class="content">
+      <div class="button-container">
+        <ButtonRound
+          class="button decrease"
+          icon="minus"
+          @click="onDecrease"
+          :disabled="decreaseDisabled"
+        />
+      </div>
+
+      <span class="value" v-if="!isEditable">{{ currentValue }}</span>
+
+      <input
+        @click="onInputClick"
+        ref="input"
+        class="edit-input"
+        :class="{ invalid: !isValid }"
+        type="text"
+        maxlength="6"
+        v-if="isEditable"
+        v-model="inputValue"
+      />
+
+      <div class="button-container">
+        <ButtonRound
+          class="button increase"
+          icon="plus"
+          @click="onIncrease"
+          :disabled="increaseDisabled"
+        />
+      </div>
+    </div>
+  </Card>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import { Prop, Watch } from "vue-property-decorator";
+import ButtonRound from "@/components/ButtonRound.vue";
+import Card from "@/components/Card.vue";
+
+@Component<CardNumber>({
+  name: "CardNumber",
+  components: { ButtonRound, Card }
+})
+export default class CardNumber extends Vue {
+  $refs!: {
+    input: HTMLInputElement;
+  };
+
+  @Prop(String)
+  title!: string;
+
+  @Prop(String)
+  unit!: string;
+
+  @Prop(Number)
+  startValue!: number;
+
+  @Prop(Number)
+  minimumValue!: number;
+
+  @Prop(Number)
+  maximumValue!: number;
+
+  @Prop({ default: true })
+  isEditable!: boolean;
+
+  @Prop({ default: 1 })
+  step!: number;
+
+  @Watch("inputValue")
+  onInputValueChange(value: string) {
+    if (this.isValid) {
+      this.currentValue = Number(value);
+    }
+  }
+
+  currentValue: number = this.startValue;
+
+  inputValue = this.startValue.toString();
+
+  get isDirty() {
+    return this.currentValue !== this.startValue;
+  }
+
+  get decreaseDisabled() {
+    return this.currentValue === this.minimumValue;
+  }
+
+  get increaseDisabled() {
+    return this.currentValue === this.maximumValue;
+  }
+
+  get isValid(): boolean {
+    return (
+      !/[^\d]/g.test(this.inputValue) &&
+      Number(this.inputValue) <= this.maximumValue &&
+      Number(this.inputValue) >= this.minimumValue
+    );
+  }
+
+  onIncrease() {
+    this.currentValue = Math.min(this.currentValue + this.step, this.maximumValue);
+  }
+
+  onDecrease() {
+    this.currentValue = Math.max(this.currentValue - this.step, this.minimumValue);
+  }
+
+  onAccept() {
+    alert("This will do something in the future");
+  }
+
+  onReset() {
+    this.currentValue = this.startValue;
+    this.inputValue = this.startValue.toString();
+  }
+
+  onInputClick() {
+    this.$refs.input.select();
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.card-number {
+  overflow: hidden;
+  transition: background-color 0.2s;
+
+  &:hover .content .button:not(:disabled) {
+    opacity: 1;
+  }
+
+  .interaction {
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 0;
+    width: 64px;
+    height: 48px;
+    transition: transform 0.2s, opacity 0.2s;
+    cursor: pointer;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.hidden {
+      transform: translateY(-100%);
+    }
+
+    &.accept {
+      background: #42b983;
+      color: #fff;
+    }
+
+    &.reset {
+      background: #eaedf3;
+      color: #555;
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2.25rem;
+
+    .value,
+    .edit-input {
+      font: inherit;
+      color: inherit;
+      border: 0;
+      border-bottom: 1px solid transparent;
+    }
+
+    .edit-input {
+      background: none;
+      position: relative;
+      width: calc(100% - 128px);
+      text-align: center;
+
+      &.invalid {
+        border-color: #ff3860;
+      }
+    }
+
+    .button-container {
+      width: 64px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button {
+      flex-grow: 0;
+      flex-shrink: 0;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+  }
+}
+</style>

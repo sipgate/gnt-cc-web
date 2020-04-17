@@ -1,12 +1,16 @@
 <template>
-  <div class="card">
-    <div class="card-title">{{ title }}</div>
-    <div class="card-body">
-      <ButtonRound icon="minus" @click="onDecrease"/>
-      <slot />
-      <ButtonRound icon="plus" @click="onIncrease"/>
+  <div class="card" :class="{ 'no-horizontal-padding': noHorizontalPadding }">
+    <div class="card-title">
+      <slot name="title-left" />
+      <span class="card-label">{{ title }}</span>
+      <slot name="title-right" />
     </div>
-    <div class="card-subtitle">{{ subtitle }}</div>
+    <div class="card-body">
+      <slot />
+    </div>
+    <div class="card-subtitle">
+      <span class="card-label">{{ subtitle }}</span>
+    </div>
   </div>
 </template>
 
@@ -14,11 +18,9 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import ButtonRound from "@/components/ButtonRound.vue";
 
 @Component({
-  name: "Card",
-  components: {ButtonRound}
+  name: "Card"
 })
 export default class Card extends Vue {
   @Prop(String)
@@ -27,20 +29,15 @@ export default class Card extends Vue {
   @Prop(String)
   readonly subtitle!: string;
 
-  onIncrease() {
-
-  }
-
-  onDecrease() {
-
-  }
+  @Prop({ default: false })
+  readonly noHorizontalPadding!: boolean;
 }
 </script>
 
 <style scoped lang="scss">
 div.card {
   border-radius: 4px;
-  padding: 30px;
+  padding: 0 30px;
   flex: 1 0 auto;
   box-sizing: border-box;
   border: 1px solid #eaedf3;
@@ -48,31 +45,37 @@ div.card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  div.card-title {
-    text-transform: uppercase;
+
+  &.no-horizontal-padding {
+    padding: 0;
+  }
+
+  .card-title,
+  .card-subtitle {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.75rem;
-    line-height: 1.125rem;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #9ea0a5;
-    text-align: center;
+
+    .card-label {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-weight: 500;
+      color: #9ea0a5;
+      text-transform: uppercase;
+    }
+  }
+
+  div.card-title {
+    justify-content: space-between;
   }
   div.card-body {
-    font-size: 2.25rem;
-    color: #3e3f42;
-    line-height: 3.125rem;
-    text-align: center;
-    margin-top: 8px;
+    margin: 12px 0;
   }
   div.card-subtitle {
-    text-transform: uppercase;
     font-size: 0.75rem;
-    line-height: 1.125rem;
-    margin-top: 5px;
-    font-weight: 500;
-    color: #9ea0a5;
-    text-align: center;
-    height: 18px;
   }
 }
 </style>
