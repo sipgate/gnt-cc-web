@@ -7,7 +7,7 @@
         </b-navbar-item>
       </template>
       <template slot="start">
-        <b-navbar-item tag="router-link" :to="links.statistics">
+        <b-navbar-item tag="router-link" :to="links.statistics" class="exact-match-only">
           Statistics
         </b-navbar-item>
         <b-navbar-item tag="router-link" :to="links.instances">
@@ -87,7 +87,11 @@ export default class NavBar extends Vue {
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
+#nav a.router-link-exact-active.exact-match-only {
+  color: #42b983;
+}
+
+#nav a.router-link-active:not(.exact-match-only) {
   color: #42b983;
 }
 
