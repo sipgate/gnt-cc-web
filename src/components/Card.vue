@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-title">{{ title }}</div>
     <div class="card-body">
+      <ButtonRound icon="minus" @click="onDecrease"/>
       <slot />
+      <ButtonRound icon="plus" @click="onIncrease"/>
     </div>
     <div class="card-subtitle">{{ subtitle }}</div>
   </div>
@@ -12,9 +14,11 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
+import ButtonRound from "@/components/ButtonRound.vue";
 
 @Component({
-  name: "Card"
+  name: "Card",
+  components: {ButtonRound}
 })
 export default class Card extends Vue {
   @Prop(String)
@@ -22,6 +26,14 @@ export default class Card extends Vue {
 
   @Prop(String)
   readonly subtitle!: string;
+
+  onIncrease() {
+
+  }
+
+  onDecrease() {
+
+  }
 }
 </script>
 

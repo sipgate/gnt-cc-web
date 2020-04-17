@@ -17,7 +17,9 @@ import {
   faCaretUp,
   faUpload,
   faUser,
-  faLock
+  faLock,
+  faPlus,
+  faMinus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import App from "./App.vue";
@@ -41,7 +43,9 @@ library.add(
   faCaretUp,
   faUpload,
   faUser,
-  faLock
+  faLock,
+  faPlus,
+  faMinus
 );
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 
