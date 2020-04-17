@@ -20,7 +20,7 @@
       </div>
     </section>
 
-    <div class="grid">
+    <div class="grid" v-if="instance">
       <Card title="memory" subtitle="MB">{{ instance.memoryTotal }}</Card>
       <Card title="vcpu">{{ instance.cpuCount }}</Card>
       <Card title="Dummy" subtitle="GB">42</Card>
@@ -102,25 +102,27 @@ import Card from "@/components/Card.vue";
 export default class InstanceDetailView extends Vue {
   @State((state: StoreState) => state.instances) allInstances!: Record<string, GntInstance[]>;
 
-  @Watch("currentCluster")
-  onCurrentClusterChanged() {
+  @Watch("instanceName")
+  onInstanceNameChanged() {
     this.loadInstance();
   }
 
   async created() {
-    if (this.currentCluster) {
-      this.loadInstance();
-    }
+    this.loadInstance();
   }
 
   async loadInstance() {
-    // TODO: only load single instance
-    await this.$store.dispatch(Actions.LoadInstances, {
-      cluster: this.currentCluster
+    await this.$store.dispatch(Actions.LoadInstance, {
+      cluster: this.currentCluster,
+      instance: this.instanceName
     });
   }
 
   get instance(): GntInstance | undefined {
+    if (!this.allInstances[this.currentCluster]) {
+      return undefined;
+    }
+
     return this.allInstances[this.currentCluster].find(
       instance => instance.name === this.instanceName
     );

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import InstancesView from "@/views/InstancesView.vue";
+import InstancesListView from "@/views/InstancesListView.vue";
 import StatisticsView from "@/views/StatisticsView.vue";
 import NodesView from "@/views/NodesView.vue";
 import DashboardView from "@/views/DashboardView.vue";
@@ -31,8 +31,8 @@ const routes = [
       },
       {
         path: "instances",
-        name: PageNames.Instances,
-        component: InstancesView
+        name: PageNames.InstancesList,
+        component: InstancesListView
       },
       {
         path: `instances/:${Params.InstanceName}`,

@@ -21,22 +21,52 @@ const initialState: StoreState = {
 export const Actions = {
   LoadClusters: "loadClusters",
   LoadNodes: "loadNodes",
-  LoadInstances: "loadInstances"
+  LoadInstances: "loadInstances",
+  LoadInstance: "loadInstance"
+};
+
+export const Mutations = {
+  SetClusters: "setClusters",
+  SetNodes: "setNodes",
+  SetInstances: "setInstances",
+  AddInstance: "addInstance"
 };
 
 export default new Vuex.Store({
   state: initialState,
   mutations: {
-    setClusters(state, clusters: string[]) {
+    [Mutations.SetClusters](state, clusters: string[]) {
       state.clusters = clusters;
     },
-    setNodes(state, { cluster, nodes }: { cluster: string; nodes: GntNode[] }) {
+    [Mutations.SetNodes](state, { cluster, nodes }: { cluster: string; nodes: GntNode[] }) {
       state.nodes = {
         ...state.nodes,
         [cluster]: nodes
       };
     },
-    setInstances(state, { cluster, instances }: { cluster: string; instances: GntInstance[] }) {
+    [Mutations.SetInstances](
+      state,
+      { cluster, instances }: { cluster: string; instances: GntInstance[] }
+    ) {
+      state.instances = {
+        ...state.instances,
+        [cluster]: instances
+      };
+    },
+    [Mutations.AddInstance](
+      state,
+      { cluster, instance }: { cluster: string; instance: GntInstance }
+    ) {
+      const instances = state.instances[cluster] || [];
+
+      const oldIndex = instances.findIndex(el => el.name === instance.name);
+
+      if (oldIndex > -1) {
+        instances[oldIndex] = instance;
+      } else {
+        instances.push(instance);
+      }
+
       state.instances = {
         ...state.instances,
         [cluster]: instances
@@ -52,21 +82,28 @@ export default new Vuex.Store({
     },
     async [Actions.LoadClusters]({ commit }) {
       const response = await Api.get("clusters");
-      commit("setClusters", response.clusters);
+      commit(Mutations.SetClusters, response.clusters);
       return response.clusters;
     },
     async [Actions.LoadNodes]({ commit }, { cluster }) {
       const response = await Api.get(`clusters/${cluster}/nodes`);
-      commit("setNodes", {
+      commit(Mutations.SetNodes, {
         cluster,
         nodes: response.nodes
       });
     },
     async [Actions.LoadInstances]({ commit }, { cluster }) {
       const response = await Api.get(`clusters/${cluster}/instances`);
-      commit("setInstances", {
+      commit(Mutations.SetInstances, {
         cluster,
         instances: response.instances
+      });
+    },
+    async [Actions.LoadInstance]({ commit }, { cluster, instance }) {
+      const response = await Api.get(`clusters/${cluster}/instances/${instance}`);
+      commit(Mutations.AddInstance, {
+        cluster,
+        instance: response.instance
       });
     }
   }

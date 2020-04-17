@@ -39,9 +39,9 @@ import PageNames from "@/data/enum/PageNames";
 import Params from '@/data/enum/Params';
 
 @Component({
-  name: "InstancesView"
+  name: "InstancesListView.vue"
 })
-export default class InstancesView extends Vue {
+export default class InstancesListView extends Vue {
   @State((state: StoreState) => state.instances) allInstances!: Record<string, GntInstance[]>;
 
   @Watch("currentCluster")

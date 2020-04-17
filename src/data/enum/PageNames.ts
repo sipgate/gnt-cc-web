@@ -1,6 +1,6 @@
 export default {
   Statistics: "statistics",
-  Instances: "instances",
+  InstancesList: "instancesList",
   Nodes: "nodes",
   Jobs: "jobs",
   Login: "login",
