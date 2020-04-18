@@ -30,16 +30,17 @@
 
       <span class="value" v-if="!isEditable">{{ currentValue }}</span>
 
-      <input
-        @click="onInputClick"
-        ref="input"
-        class="edit-input"
-        :class="{ invalid: !isValid }"
-        type="text"
-        maxlength="6"
-        v-if="isEditable"
-        v-model="inputValue"
-      />
+      <form class="number-form" @submit.prevent="onAccept" v-if="isEditable">
+        <input
+          @click="onInputClick"
+          ref="input"
+          class="number-input"
+          :class="{ invalid: !isValid }"
+          type="text"
+          maxlength="6"
+          v-model="inputValue"
+        />
+      </form>
 
       <div class="button-container">
         <ButtonRound
@@ -123,14 +124,18 @@ export default class CardNumber extends Vue {
 
   onIncrease() {
     this.currentValue = Math.min(this.currentValue + this.step, this.maximumValue);
+    this.inputValue = this.currentValue.toString();
   }
 
   onDecrease() {
     this.currentValue = Math.max(this.currentValue - this.step, this.minimumValue);
+    this.inputValue = this.currentValue.toString();
   }
 
   onAccept() {
-    alert("This will do something in the future");
+    if (this.isValid) {
+      alert("This will do something in the future");
+    }
   }
 
   onReset() {
@@ -189,18 +194,23 @@ export default class CardNumber extends Vue {
     font-size: 2.25rem;
 
     .value,
-    .edit-input {
+    .number-input {
+      width: 100%;
+      display: inline-block;
       font: inherit;
       color: inherit;
       border: 0;
       border-bottom: 1px solid transparent;
+      text-align: center;
     }
 
-    .edit-input {
+    .number-form {
+      width: calc(100% - 128px);
+    }
+
+    .number-input {
       background: none;
       position: relative;
-      width: calc(100% - 128px);
-      text-align: center;
 
       &.invalid {
         border-color: #ff3860;
