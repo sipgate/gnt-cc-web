@@ -21,10 +21,10 @@
     <div class="content">
       <div class="button-container">
         <ButtonRound
+          v-show="!decreaseDisabled"
           class="button decrease"
           icon="minus"
           @click="onDecrease"
-          :disabled="decreaseDisabled"
         />
       </div>
 
@@ -44,10 +44,10 @@
 
       <div class="button-container">
         <ButtonRound
+          v-show="!increaseDisabled"
           class="button increase"
           icon="plus"
           @click="onIncrease"
-          :disabled="increaseDisabled"
         />
       </div>
     </div>

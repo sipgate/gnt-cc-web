@@ -27,6 +27,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import filesize from "filesize";
+import filters from "./data/filters";
 
 library.add(
   faCheck,
@@ -57,6 +58,10 @@ Vue.use(Buefy, {
 });
 
 Vue.config.productionTip = false;
+
+for (const [key, value] of filters) {
+  Vue.filter(key, value);
+}
 
 new Vue({
   router,

@@ -1,26 +1,16 @@
 <template>
   <div class="instance-details">
-    <section class="hero is-primary">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns">
-            <div class="column">
-              <h1 class="title">{{ instanceName }}</h1>
-            </div>
-            <div class="column">
-              <div class="test">
-                <b-button type="is-light">Migrate</b-button>
-                <b-button type="is-light">Failover</b-button>
-                <b-button type="is-danger">Shutdown</b-button>
-                <b-button type="is-danger">Kill</b-button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <section class="instance-header">
+      <span class="instance-name">{{ instanceName }}</span>
+      <div class="instance-actions">
+        <b-button type="is-light">Migrate</b-button>
+        <b-button type="is-light">Failover</b-button>
+        <b-button type="is-danger">Shutdown</b-button>
+        <b-button type="is-danger">Kill</b-button>
       </div>
     </section>
 
-    <div class="grid" v-if="instance">
+    <section class="cards" v-if="instance">
       <CardNumber
         title="memory"
         unit="MB"
@@ -37,37 +27,18 @@
         :maximumValue="16"
       />
       <CardNumber
-        title="disk"
+        v-for="disk in instance.disks"
+        :key="disk.uid"
+        :title="disk.name"
         unit="GB"
-        :startValue="50"
-        :minimumValue="0"
-        :maximumValue="120"
+        :startValue="disk.size | mbToGb"
+        :minimumValue="disk.size | mbToGb"
+        :maximumValue="10000"
         :step="5"
       />
-      <CardNumber
-        title="Dummy"
-        unit="bananen"
-        :startValue="30000"
-        :minimumValue="10000"
-        :maximumValue="50000"
-        :step="5000"
-        :is-editable="false"
-      />
 
-      <section class="quick-info  cards" v-if="instance">
-        <Card title="Nodes" :subtitle="`Total: ${instance.secondaryNodes.length + 1}`">
-          <div class="nodes">
-            <div class="node">
-              {{ instance.primaryNode }}
-              <b-tag rounded>primary</b-tag>
-            </div>
-            <div class="node" v-for="node in instance.secondaryNodes" :key="node">
-              <span>{{ node }}</span>
-            </div>
-          </div>
-        </Card>
-      </section>
-    </div>
+      <CardNodes :primaryNode="instance.primaryNode" :secondaryNodes="instance.secondaryNodes" />
+    </section>
   </div>
 </template>
 
@@ -81,10 +52,11 @@ import { Watch } from "vue-property-decorator";
 import Params from "@/data/enum/Params";
 import Card from "@/components/Card.vue";
 import CardNumber from "@/components/CardNumber.vue";
+import CardNodes from "@/components/CardNodes.vue";
 
 @Component({
   name: "InstanceDetailView",
-  components: { Card, CardNumber }
+  components: { Card, CardNumber, CardNodes }
 })
 export default class InstanceDetailView extends Vue {
   @State((state: StoreState) => state.instances) allInstances!: Record<string, GntInstance[]>;
@@ -126,53 +98,39 @@ export default class InstanceDetailView extends Vue {
 </script>
 
 <style scoped lang="scss">
-.instance-details {
-  .test {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
+$spacingOuter: 3rem;
+$spacingInner: 1.5rem;
 
-    .button {
-      margin-left: 1rem;
+.instance-details {
+  section.instance-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacingOuter;
+    background: #000;
+    color: #fff;
+
+    .instance-name {
+      font-size: 2rem;
+    }
+
+    .instance-actions {
+      .button {
+        margin-left: $spacingInner;
+      }
     }
   }
-}
 
-section.cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-  grid-area: stats;
-}
-
-section.quick-info {
-  grid-area: quickstats;
-}
-
-div.nodes {
-  font-size: 1rem;
-  text-align: left;
-  margin: 0.5rem 0;
-  div.node {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 2.5rem;
+  section.cards {
+    display: grid;
+    padding: $spacingOuter;
+    row-gap: $spacingInner;
+    column-gap: $spacingInner;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      "stats stats stats stats"
+      "quickstats none none none";
   }
-}
-
-div.grid {
-  display: grid;
-  margin: 3rem;
-  row-gap: 3rem;
-  column-gap: 1.5rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, auto);
-  grid-template-areas:
-    "stats stats stats stats"
-    "quickstats none none none";
 }
 </style>
