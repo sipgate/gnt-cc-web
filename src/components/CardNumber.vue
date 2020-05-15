@@ -1,22 +1,22 @@
 <template>
   <Card class="card-number" :title="title" :subtitle="unit" :noHorizontalPadding="true">
-    <button
+    <Button
       slot="title-left"
-      class="interaction reset"
+      class="interaction"
       :class="{ hidden: !isDirty && isValid }"
       @click="onReset"
-    >
-      <b-icon icon="undo" />
-    </button>
+      type="reset"
+      icon="undo"
+    />
 
-    <button
+    <Button
       slot="title-right"
-      class="interaction accept"
+      class="interaction"
       :class="{ hidden: !isDirty || !isValid }"
       @click="onAccept"
-    >
-      <b-icon icon="check" />
-    </button>
+      type="accept"
+      icon="check"
+    />
 
     <div class="content">
       <div class="button-container">
@@ -58,12 +58,13 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
+import Button from "@/components/Button.vue"
 import ButtonRound from "@/components/ButtonRound.vue";
 import Card from "@/components/Card.vue";
 
 @Component<CardNumber>({
   name: "CardNumber",
-  components: { ButtonRound, Card }
+  components: { Button, ButtonRound, Card }
 })
 export default class CardNumber extends Vue {
   $refs!: {
@@ -161,29 +162,10 @@ export default class CardNumber extends Vue {
   .interaction {
     flex-shrink: 0;
     flex-grow: 0;
-    border: 0;
     width: 64px;
-    height: 48px;
-    transition: transform 0.2s, opacity 0.2s;
-    cursor: pointer;
-    opacity: 0.8;
-
-    &:hover {
-      opacity: 1;
-    }
 
     &.hidden {
       transform: translateY(-100%);
-    }
-
-    &.accept {
-      background: #42b983;
-      color: #fff;
-    }
-
-    &.reset {
-      background: #eaedf3;
-      color: #555;
     }
   }
 

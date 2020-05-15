@@ -3,10 +3,10 @@
     <section class="instance-header">
       <span class="instance-name">{{ instanceName }}</span>
       <div class="instance-actions">
-        <b-button type="is-light">Migrate</b-button>
-        <b-button type="is-light">Failover</b-button>
-        <b-button type="is-danger">Shutdown</b-button>
-        <b-button type="is-danger">Kill</b-button>
+        <Button label="Migrate" />
+        <Button label="Failover" />
+        <Button label="Shutdown" type="danger" />
+        <Button label="Kill" icon="skull-crossbones" type="danger" />
       </div>
     </section>
 
@@ -39,6 +39,10 @@
 
       <CardNodes :primaryNode="instance.primaryNode" :secondaryNodes="instance.secondaryNodes" />
     </section>
+    <div>
+      <Button label="Reset all" type="reset" />
+      <Button label="Set all" type="accept" />
+    </div>
   </div>
 </template>
 
@@ -50,13 +54,14 @@ import { State } from "vuex-class";
 import GntInstance from "@/model/GntInstance";
 import { Watch } from "vue-property-decorator";
 import Params from "@/data/enum/Params";
+import Button from "@/components/Button.vue";
 import Card from "@/components/Card.vue";
 import CardNumber from "@/components/CardNumber.vue";
 import CardNodes from "@/components/CardNodes.vue";
 
 @Component({
   name: "InstanceDetailView",
-  components: { Card, CardNumber, CardNodes }
+  components: { Button, Card, CardNumber, CardNodes }
 })
 export default class InstanceDetailView extends Vue {
   @State((state: StoreState) => state.instances) allInstances!: Record<string, GntInstance[]>;
@@ -115,7 +120,9 @@ $spacingInner: 1.5rem;
     }
 
     .instance-actions {
-      .button {
+      display: flex;
+
+      .custom-button {
         margin-left: $spacingInner;
       }
     }

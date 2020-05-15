@@ -20,7 +20,8 @@ import {
   faLock,
   faPlus,
   faMinus,
-  faUndo
+  faUndo,
+  faSkullCrossbones
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import App from "./App.vue";
@@ -48,7 +49,8 @@ library.add(
   faLock,
   faPlus,
   faMinus,
-  faUndo
+  faUndo,
+  faSkullCrossbones
 );
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 
