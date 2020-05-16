@@ -3,11 +3,12 @@ import Vuex from "vuex";
 import Api from "@/store/api";
 import GntInstance from "@/model/GntInstance";
 import GntNode from "@/model/GntNode";
+import GntCluster from "@/model/GntCluster";
 
 Vue.use(Vuex);
 
 export interface StoreState {
-  clusters: string[];
+  clusters: GntCluster[];
   nodes: Record<string, GntNode[]>;
   instances: Record<string, GntInstance[]>;
 }
@@ -35,7 +36,7 @@ export const Mutations = {
 export default new Vuex.Store({
   state: initialState,
   mutations: {
-    [Mutations.SetClusters](state, clusters: string[]) {
+    [Mutations.SetClusters](state, clusters: GntCluster[]) {
       state.clusters = clusters;
     },
     [Mutations.SetNodes](state, { cluster, nodes }: { cluster: string; nodes: GntNode[] }) {

@@ -11,6 +11,7 @@ import Component from "vue-class-component";
 import NavBar from "@/components/NavBar.vue";
 import { Actions } from "@/store";
 import Params from "@/data/enum/Params";
+import GntCluster from "../model/GntCluster";
 
 @Component({
   name: "DashboardView",
@@ -18,7 +19,7 @@ import Params from "@/data/enum/Params";
 })
 export default class DashboardView extends Vue {
   async created() {
-    const clusters = await this.$store.dispatch(Actions.LoadClusters);
+    const clusters: GntCluster[] = await this.$store.dispatch(Actions.LoadClusters);
 
     if (
       typeof this.$route.params[Params.Cluster] === "undefined" &&
@@ -27,7 +28,7 @@ export default class DashboardView extends Vue {
     ) {
       await this.$router.replace({
         params: {
-          cluster: clusters[0]
+          cluster: clusters[0].name
         }
       });
     }

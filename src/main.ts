@@ -21,6 +21,7 @@ import {
   faPlus,
   faMinus,
   faUndo,
+  faServer,
   faSkullCrossbones
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -50,6 +51,7 @@ library.add(
   faPlus,
   faMinus,
   faUndo,
+  faServer,
   faSkullCrossbones
 );
 Vue.component("vue-fontawesome", FontAwesomeIcon);
